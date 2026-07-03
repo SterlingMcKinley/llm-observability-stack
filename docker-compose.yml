@@ -8,8 +8,8 @@ services:
       - "8000:8000"
     environment:
       - AWS_DEFAULT_REGION=us-east-1
-      # Note: Ensure your local terminal environment has valid AWS or OpenAI credentials 
-      # if you modify the code to hit live models.
+      # Note: Local terminal environment has valid AWS or OpenAI credentials 
+      # modify the code to hit live models.
     volumes:
       - ./app:/app
 
