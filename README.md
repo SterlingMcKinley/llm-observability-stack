@@ -12,7 +12,6 @@ This project provides a specialized telemetry framework and observability that t
 
 <img width="2116" height="1110" alt="LLM_ArchitectureDiagram_updated" src="https://github.com/user-attachments/assets/1b869a48-f7a7-4d51-b004-fa2a778c44c2" />
 
-
 ## Step-by-Step Instructions to Deploy and Run:
 
 1. Navigate to the root directory containing your configuration files and run:
@@ -27,7 +26,7 @@ Verify everything is running perfectly by executing docker-compose ps. There sho
 
 - To generate continuous calls I utilized two different shell loops:
 
- bash randomizer to split the traffic between success and failure for model: *meta-llama3-70b*
+bash randomizer to split the traffic between success and failure for model: _meta-llama3-70b_
 
 ```bash
 while true; do
@@ -43,7 +42,7 @@ while true; do
 done
 ```
 
-bash randomizer to split the traffic between success and failure for model: *broken-model*
+bash randomizer to split the traffic between success and failure for model: _broken-model_
 
 ```bash
 while true; do
@@ -102,5 +101,14 @@ View the raw text payload being parsed by Prometheus anytime by visiting: http:/
 
 <img width="1912" height="1012" alt="grafana_llm_dashboard" src="https://github.com/user-attachments/assets/975b4c4e-a7f9-4371-9db9-6fbf6594187d" />
 
-
 ## Issues / Lessons Learned
+
+### GRAFANA PROMQL OPERATOR ERROR
+
+Issue: During the dashboard/alerting setup for our LLM evaluation metrics Panel 3: Real-Time Hallucination Tracking / Faithfulness Indicator (Gauge), queries targeting the llm_eval_faithfulness_score metric failed to render or threw syntax errors. The query was originally written using mean() as the aggregation operator to find the average score across different models. PromQL (Prometheus Query Language) does not possess a mean() aggregation operator.
+
+Solution: While "mean" is the mathematical definition, PromQL strictly uses avg() for spatial aggregations (combining multiple time series across labels)
+
+```bash
+avg(llm_eval_faithfulness_score) by (model)
+```
