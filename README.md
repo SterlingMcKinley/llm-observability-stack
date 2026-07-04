@@ -10,6 +10,9 @@ This project provides a specialized telemetry framework and observability that t
 
 ## Architecture Diagram
 
+<img width="2116" height="1110" alt="LLM_ArchitectureDiagram_updated" src="https://github.com/user-attachments/assets/1b869a48-f7a7-4d51-b004-fa2a778c44c2" />
+
+
 ## Step-by-Step Instructions to Deploy and Run:
 
 1. Navigate to the root directory containing your configuration files and run:
@@ -24,7 +27,7 @@ Verify everything is running perfectly by executing docker-compose ps. There sho
 
 - To generate continuous calls I utilized two different shell loops:
 
-- bash randomizer to split the traffic between success and failure for model: meta-llama3-70b
+ bash randomizer to split the traffic between success and failure for model: *meta-llama3-70b*
 
 ```bash
 while true; do
@@ -40,7 +43,7 @@ while true; do
 done
 ```
 
-- bash randomizer to split the traffic between success and failure for model: broken-model
+bash randomizer to split the traffic between success and failure for model: *broken-model*
 
 ```bash
 while true; do
@@ -56,7 +59,7 @@ while true; do
 done
 ```
 
-- View the raw text payload being parsed by Prometheus anytime by visiting: http://localhost:8000/metrics.
+View the raw text payload being parsed by Prometheus anytime by visiting: http://localhost:8000/metrics.
 
 3. Configure the Grafana Dashboard
 
@@ -94,5 +97,10 @@ done
   ```
 
 5. Once the dashboard is complete, SAVE IT. As the background traffic loop continues to run, the live dashboard will track real-time API latency, operational errors, token consumption costs, and automated response quality scores.
+
+## Dashboard
+
+<img width="1912" height="1012" alt="grafana_llm_dashboard" src="https://github.com/user-attachments/assets/975b4c4e-a7f9-4371-9db9-6fbf6594187d" />
+
 
 ## Issues / Lessons Learned
